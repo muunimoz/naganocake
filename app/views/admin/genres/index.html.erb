@@ -5,13 +5,15 @@
   <%= f.submit '新規登録', class: "btn btn-info" %>
 <% end %>
 
-<table></table>
+<table>
   <tbody>
-    <% @genres.each do |genre| %>
+    <thead>
+      <% @genres.each do |genre| %>
       <tr>
         <td><%= genre.name %></td>
         <td><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-primary" %></td>
       </tr>
     <% end %>
+    </thead>
   </tbody>
 </table>

@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   end
   
   scope module: :public do
-    resources :customer, only: [:show, :index]
+    get 'customers/mypage' => 'customers#show', as: 'mypage'
+    resources :customers, only: [:index, :show]
+    resources :addresses, only: [:index, :edit]
   end
   
    namespace :admin do
