@@ -1,4 +1,7 @@
 class Admin::ItemsController < ApplicationController
+  before_action :authenticate_admin!
+  before_action :ensure_item, only: [:show, :edit, :update]
+
   def new
     @item = Item.new
   end
@@ -39,4 +42,9 @@ class Admin::ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:genre_id, :name, :introduction, :price, :is_active)
   end
+  
+  def ensure_item
+    @item = Item.find(params[:id])
+  end
+  
 end
