@@ -17,8 +17,8 @@
     </tr>
     <tr>
       <tb>フリガナ</tb>
-      <tb><%= @customer.first_name_kana %></tb>
-      <tb><%= @customer.last_name_kana %></tb>
+      <tb>(セイ)<%= @customer.first_name_kana %></tb>
+      <tb>(メイ)<%= @customer.last_name_kana %></tb>
     </tr>
     <tr>
       <tb>郵便番号</tb>
@@ -40,5 +40,10 @@
       <tb>会員ステータス</tb>
       <tb><%= @customer.is_active ? '有効' : '退会' %></tb>
     </tr>
+    <tr>
+      <td><%= link_to "編集", edit_admin_customer_path(@customer), class: "btn btn-success" %></td>
+      <td><%= link_to "注文履歴一覧を見る", admin_customer_orders_path(@customer), class: "btn btn-primary" %></td>
+    </tr>
+
   </tbody>
 </table>

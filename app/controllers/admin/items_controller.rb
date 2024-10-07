@@ -12,20 +12,25 @@ class Admin::ItemsController < ApplicationController
       redirect_to adimin_items_path
     else
       @items = Item.all
-      render :index
+      render :new
     end
   end
 
   def index
-    @items = Item.all
+    if params[:genre_id]
+      @genre = Genre.find(params[:genre_id])
+      all_items = @genre.items
+    else
+      all_items = Item.includes(:genre)
+    end
+    @items = all_items.page(params[:page])
+    @all_items_count = all_items.count
   end
 
   def show
-    @item = Item.find(params.id)
   end
 
   def edit
-    @item = Item.find(params.id)
   end
   
   def update
