@@ -1,30 +1,26 @@
 class Public::AddressesController < ApplicationController
+  before_action :authenticate_customer!
+  before_action :ensure_address, only: [:edit, :update, :destroy]
+
   def index
     @addresses = current_address.addresses
     @address = Address.new
   end
   
   def create
-     @address = address.new(address_params)
-    if @address.save
-      redirect_to addresss_path
-    else
-      @addresss = address.all
-      render :index
-    end
+    @addresses = current_customer.addresses
+    # @address = @addresses.new(address_params)
+    # こう書くと、save出来なかった時に、@addressesの最後に空レコードが入り、エラーになる。
+    @address = Address.new(address_params)
+    @address.customer_id = current_customer.id
+    @address.save ? (redirect_to addresses_path) : (render :index)
   end
   
   def edit
-    @address = Address.find(params[:id])
   end
   
   def update
-    @address = address.find(params[:id])
-    if @address.update(address_params)
-      redirect_to addresses_path
-    else 
-      render :edit
-    end
+    @address.update(address_params) ? (redirect_to addresses_path) : (render :edit)
   end
   
   def destroy
@@ -33,6 +29,12 @@ class Public::AddressesController < ApplicationController
   end
   
   private
+  
+  def ensure_address
+    @addresses = current_customer.addresses
+    @address = @addresses.find_by(id: params[:id])
+    redirect_to addresses_path unless @address
+  end
   
   def address_params
     params.require(:address).permit(:postal_code, :destination, :name)
