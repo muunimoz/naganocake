@@ -1,6 +1,4 @@
-<h1>ジャンル編集</h1>
-<%= form_with model: @genre, url: admin_genre_path do |f| %>
-<h4>ジャンル名</h4>
-  <%= f.text_field :name %>
-  <%= f.submit '変更を保存', class: "btn-info" %>
-<% end %>
+<section class="inner">
+  <h2 class="section-ttl">ジャンル新規登録</h2>
+  <%= render 'form', genre: @genre, url: admin_genre_path(@genre), submit: '更新' %>
+</section>
