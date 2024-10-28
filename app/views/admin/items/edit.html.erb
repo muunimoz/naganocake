@@ -1,25 +1,4 @@
-<h1>商品編集</h1>
-<%= form_with model: @item, url: admin_item_path do |f| %>
-  <div>
-    商品画像<%= f.text_field :name %>
-  </div>
-  <div>
-    商品名<%= f.text_field :name %>
-  </div>
-  <div>
-    商品説明<%= f.text_field :introduction %>
-  </div>
-  <div>
-    ジャンル<%= f.collection_select :genre_id, Genre.all, :id, :name %>
-  </div>
-  <div>
-    税抜価格<%= f.number_field :price %>
-  </div>
-  <div>
-    販売ステータス
-    
-  </div>
-  <div>
-    <%= f.submit '変更を保存', class: "btn btn-info" %>
-  </div>
-<% end %>
+<section class="inner">
+  <h2 class="section-ttl"><%= @item.name %>の編集</h2>
+  <%= render 'form', item: @item, url: admin_item_path(@item), submit: '更新' %>
+</section>
