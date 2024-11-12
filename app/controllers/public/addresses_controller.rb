@@ -3,7 +3,7 @@ class Public::AddressesController < ApplicationController
   before_action :ensure_address, only: [:edit, :update, :destroy]
 
   def index
-    @addresses = current_address.addresses
+    @addresses = current_customer.addresses
     @address = Address.new
   end
   
