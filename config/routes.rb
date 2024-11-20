@@ -4,9 +4,9 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
   
-  devise_for :admin, skip: [:registrations, :passwords], controllers: {
-    sessions: "admin/sessions"
-  }
+  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+  sessions: "admin/sessions"
+}
   
   namespace :admin do
     get 'top' => 'homes#top', as: 'top'
