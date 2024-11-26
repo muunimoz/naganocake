@@ -4,9 +4,17 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
   
-  devise_for :admins, skip: [:registrations, :passwords], controllers: {
-  sessions: "admin/sessions"
-}
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
+  }
+  
+  devise_scope :customer do
+    get '/customers/sign_out' => 'devise/sessions#destroy'
+  end
+  
+  devise_scope :admin do
+    get '/admin/sign_out' => 'devise/sessions#destroy'
+  end
   
   namespace :admin do
     get 'top' => 'homes#top', as: 'top'
@@ -18,10 +26,6 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :update] do
       resources :order_details, only: [:update]
     end
-  end
-  
-  devise_scope :customer do
-    get '/customers/sign_out' => 'devise/sessions#destroy'
   end
   
   scope module: :public do
