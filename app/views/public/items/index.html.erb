@@ -15,7 +15,7 @@
       <div class="items">
         <% @items.each do |item| %>
           <%= link_to item_path(item) do %>
-            <%= image_tag item.get_image, format: "jpeg", fallback: "no-image.png" %>
+            <%= image_tag item.get_cut_image(256,170), format: "jpeg", fallback: "no-image.png" %>
             <h5><%= item.genre.name %></h5>
             <p><%= item.name %></p>
             <p>
