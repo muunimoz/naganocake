@@ -26,8 +26,8 @@ class Item < ApplicationRecord
   
   def get_cut_image(width, height)
     unless image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      image.attach(io: File.open(file_path), filename: 'no-image.png', content_type: 'image/jpeg')
+      file_path = Rails.root.join('app/assets/images/no-image.png')
+      image.attach(io: File.open(file_path), filename: 'no-image.png', content_type: 'image/png')
     end
       image.variant(resize_to_fill: [256, 170]).processed
   end
