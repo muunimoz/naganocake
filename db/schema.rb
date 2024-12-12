@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 2024_11_12_181108) do
     t.integer "price", null: false
     t.integer "amount", null: false
     t.integer "making_status", null: false
+    t.integer "oder_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
